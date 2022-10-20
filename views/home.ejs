@@ -9,22 +9,113 @@
 </head>
 
 <body>
-    <div>
-        <% books.forEach(function(book){ %>
-            <h1>
-                <%= book.name %>
-            </h1>
-          <% }); %>
+    <div class="store">
+        <h1>MY BOOK STORE</h1>
+        <a href="/store/new" class="btn more">Add new book</a>
+        <div class="container">
+            <div class="store-wrapper">
+                <%if(books.length==0){%>
+                    <p>no books</p>
+                    <% }%>
+                        <% books?.forEach((book)=>{ %>
+                            <div class="book-card">
+                                <div class="book-card-wrapper">
+                                    <div class="book-image-area">
+                                        <img src=<%=book.img%> alt="">
+                                    </div>
+                                    <div class="book-text-area">
+                                        <h2>
+                                            <%=book.name%>
+                                        </h2>
+                                        <small>Added on <span>
+                                                <%=book.createdAt%>
+                                            </span></small>
+                                        <p>
+                                            <%=book.description%>
+                                        </p>
+
+                                        <a href="/store/description/<%=book.id%>" class="btn more">Read More</a>
+                                        <button class="btn del">Delete</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <% }) %>
+            </div>
+        </div>
     </div>
-    <form action="/" method="POST">
-        <input type="text"/>
-        <input type="submit"/>
-    </form>
 </body>
 
 <style>
-    h1{
-        color: red;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: 0.2s;
+    }
+
+    a{text-decoration: none;}
+
+    .container {
+        width: 90%;
+        margin: auto;
+    }
+
+    .book-card {
+        border: 1px solid grey;
+        width: 100%;
+        border-radius: 10px;
+        margin: 20px 0px;
+        padding: 10px;
+    }
+
+    .book-card-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .book-image-area {
+        width: 20%;
+    }
+
+    .book-image-area img {
+        width: 100%;
+        height: auto;
+        box-shadow: 0px 0px 0px 2px white, 5px 5px 5px 0px grey;
+    }
+
+    .book-text-area {
+        width: 75%;
+    }
+
+    small {
+        display: inline-block;
+        margin: 10px 0px;
+    }
+
+    .btn {
+        margin: 10px 0px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        opacity: 0.75;
+    }
+
+    .btn:hover {
+        opacity: 1;
+        box-shadow: 0px 0px 10px 0px gray;
+    }
+
+    .more {
+        background-color: green;
+
+    }
+
+    .del {
+        background: red;
     }
 </style>
 
